@@ -1,4 +1,4 @@
-import java.io.IOException;
+import java.io.*;
 import java.util.*;
 
 import com.hankcs.hanlp.corpus.document.sentence.Sentence;
@@ -19,14 +19,36 @@ public class WordCount {
     public static class Map extends Mapper<LongWritable, Text, Text, IntWritable> {
         private static final IntWritable one = new IntWritable(1);
         private final Text word = new Text();
+        private final static HashSet<String> stopWords = new HashSet<String>();
+
+        static {
+            try {
+                FileInputStream inputStream = new FileInputStream("src/main/resources/data/dictionary/stopwords.txt");
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                String str;
+                while ((str = bufferedReader.readLine()) != null) {
+                    stopWords.add(str.trim());
+                }
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException ioException) {
+                ioException.printStackTrace();
+            }
+
+        }
+
 
         public void map(LongWritable key, Text value, Context context) throws IOException, InterruptedException {
             String line = value.toString();
             Sentence sentence = new CRFLexicalAnalyzer().analyze(line);
             List<Word> wordList = sentence.toSimpleWordList();
+
             for (Word thisWord : wordList) {
-                word.set(thisWord.getValue());
-                context.write(word, one);
+                String wordValue = thisWord.getValue();
+                if (!stopWords.contains(wordValue)) {
+                    word.set(wordValue);
+                    context.write(word, one);
+                }
             }
         }
     }
