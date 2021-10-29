@@ -1,8 +1,12 @@
+import java.awt.*;
 import java.io.*;
 import java.util.*;
+import java.util.List;
 
 import com.hankcs.hanlp.corpus.document.sentence.Sentence;
 import com.hankcs.hanlp.corpus.document.sentence.word.Word;
+import com.hankcs.hanlp.model.crf.CRFLexicalAnalyzer;
+
 import org.apache.hadoop.fs.Path;
 import org.apache.hadoop.conf.*;
 import org.apache.hadoop.io.*;
@@ -12,7 +16,13 @@ import org.apache.hadoop.mapreduce.lib.input.TextInputFormat;
 import org.apache.hadoop.mapreduce.lib.output.FileOutputFormat;
 import org.apache.hadoop.mapreduce.lib.output.TextOutputFormat;
 
-import com.hankcs.hanlp.model.crf.CRFLexicalAnalyzer;
+import com.kennycason.kumo.CollisionMode;
+import com.kennycason.kumo.WordCloud;
+import com.kennycason.kumo.WordFrequency;
+import com.kennycason.kumo.bg.PixelBoundaryBackground;
+import com.kennycason.kumo.font.KumoFont;
+import com.kennycason.kumo.font.scale.LinearFontScalar;
+import com.kennycason.kumo.palette.ColorPalette;
 
 public class WordCount {
 
@@ -83,7 +93,34 @@ public class WordCount {
 
         job.waitForCompletion(true);
 
+        List<WordFrequency> wordFrequencies = new ArrayList<WordFrequency>();
+        InputStream inputStream = new FileInputStream(args[1] + "/part-r-00000");
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+        String str;
+        while ((str = bufferedReader.readLine()) != null) {
+            String[] splitResult = str.split("\t");
+            if (splitResult.length >= 2) {
+                StringBuilder thisWord = new StringBuilder();
+                for (int i = 0; i < splitResult.length - 1; i++) {
+                    thisWord.append(splitResult[i]);
+                }
+                int count = Integer.parseInt(splitResult[splitResult.length - 1]);
+                if (thisWord.toString().length() >= 2 && count > 3) {
+                    wordFrequencies.add(new WordFrequency(thisWord.toString(), count));
+                }
+            }
+        }
 
+        Dimension dimension = new Dimension(1000, 630);
+        WordCloud wordCloud = new WordCloud(dimension, CollisionMode.PIXEL_PERFECT);
+        wordCloud.setPadding(2);
+        wordCloud.setColorPalette(new ColorPalette(Color.RED, Color.MAGENTA, Color.PINK, Color.GREEN, Color.ORANGE, Color.BLUE, Color.CYAN));
+        wordCloud.setFontScalar(new LinearFontScalar(10, 40));
+        java.awt.Font font = new java.awt.Font("华文行楷", Font.PLAIN, 9);
+        wordCloud.setKumoFont(new KumoFont(font));
+        wordCloud.setBackgroundColor(new Color(255, 255, 255));
+        wordCloud.setBackground(new PixelBoundaryBackground(WordCount.class.getResourceAsStream("/whale.png")));
+        wordCloud.build(wordFrequencies);
+        wordCloud.writeToFile(args[1] + "/word_freq.png");
     }
-
 }
