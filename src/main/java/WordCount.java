@@ -23,18 +23,16 @@ public class WordCount {
 
         static {
             try {
-                FileInputStream inputStream = new FileInputStream("src/main/resources/data/dictionary/stopwords.txt");
+                InputStream inputStream = WordCount.class.getResourceAsStream("/data/dictionary/stopwords.txt");
                 BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
                 String str;
                 while ((str = bufferedReader.readLine()) != null) {
                     stopWords.add(str.trim());
                 }
-            } catch (FileNotFoundException e) {
-                e.printStackTrace();
             } catch (IOException ioException) {
-                ioException.printStackTrace();
+                System.exit(-1);
             }
-
         }
 
 
