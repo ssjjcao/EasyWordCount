@@ -105,7 +105,7 @@ public class WordCount {
                     thisWord.append(splitResult[i]);
                 }
                 int count = Integer.parseInt(splitResult[splitResult.length - 1]);
-                if (thisWord.toString().length() >= 2 && count > 3) {
+                if (thisWord.toString().length() >= 2 && count >= 100) {
                     wordFrequencies.add(new WordFrequency(thisWord.toString(), count));
                 }
             }
@@ -116,7 +116,9 @@ public class WordCount {
         wordCloud.setPadding(2);
         wordCloud.setColorPalette(new ColorPalette(Color.RED, Color.MAGENTA, Color.PINK, Color.GREEN, Color.ORANGE, Color.BLUE, Color.CYAN));
         wordCloud.setFontScalar(new LinearFontScalar(10, 40));
-        java.awt.Font font = new java.awt.Font("华文行楷", Font.PLAIN, 9);
+        Font font = Font.createFont(Font.TRUETYPE_FONT, WordCount.class.getResourceAsStream("/HuaWenXingKai.ttf")).deriveFont(9f);
+        GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        ge.registerFont(font);
         wordCloud.setKumoFont(new KumoFont(font));
         wordCloud.setBackgroundColor(new Color(255, 255, 255));
         wordCloud.setBackground(new PixelBoundaryBackground(WordCount.class.getResourceAsStream("/whale.png")));
