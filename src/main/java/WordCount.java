@@ -105,7 +105,7 @@ public class WordCount {
                     thisWord.append(splitResult[i]);
                 }
                 int count = Integer.parseInt(splitResult[splitResult.length - 1]);
-                if (thisWord.toString().length() >= 2 && count >= 100) {
+                if (thisWord.toString().length() >= 2 && count > 250) {
                     wordFrequencies.add(new WordFrequency(thisWord.toString(), count));
                 }
             }
