@@ -114,7 +114,7 @@ public class WordCount {
             }
         }
 
-        Dimension dimension = new Dimension(1000, 630);
+        Dimension dimension = new Dimension(1598, 1064);
         WordCloud wordCloud = new WordCloud(dimension, CollisionMode.PIXEL_PERFECT);
         wordCloud.setPadding(2);
         wordCloud.setColorPalette(new ColorPalette(Color.RED, Color.MAGENTA, Color.PINK, Color.GREEN, Color.ORANGE, Color.BLUE, Color.CYAN));
@@ -124,8 +124,8 @@ public class WordCount {
         ge.registerFont(font);
         wordCloud.setKumoFont(new KumoFont(font));
         wordCloud.setBackgroundColor(new Color(255, 255, 255));
-        wordCloud.setBackground(new PixelBoundaryBackground(WordCount.class.getResourceAsStream("/whale.png")));
+        wordCloud.setBackground(new PixelBoundaryBackground(WordCount.class.getResourceAsStream("/lotus.png")));
         wordCloud.build(wordFrequencies);
-        wordCloud.writeToFile(args[1] + "/word_freq.png");
+        wordCloud.writeToFile(args[1] + "/word_freq_500_lotus.png");
     }
 }

@@ -43,7 +43,7 @@ public class Test {
             wordFrequencies.add(new WordFrequency("安全", (int) (Math.random() * 1000)));
         }
 
-        Dimension dimension = new Dimension(1000, 630);
+        Dimension dimension = new Dimension(1598, 1064);
         WordCloud wordCloud = new WordCloud(dimension, CollisionMode.PIXEL_PERFECT);
         wordCloud.setPadding(2);
         wordCloud.setColorPalette(new ColorPalette(Color.RED, Color.MAGENTA, Color.PINK, Color.GREEN, Color.ORANGE, Color.BLUE, Color.CYAN));
@@ -54,8 +54,8 @@ public class Test {
         ge.registerFont(font);
         wordCloud.setKumoFont(new KumoFont(font));
         wordCloud.setBackgroundColor(new Color(255, 255, 255));
-        wordCloud.setBackground(new PixelBoundaryBackground(Test.class.getResourceAsStream("/whale.png")));
+        wordCloud.setBackground(new PixelBoundaryBackground(Test.class.getResourceAsStream("/lotus.png")));
         wordCloud.build(wordFrequencies);
-        wordCloud.writeToFile("src/test/test.png");
+        wordCloud.writeToFile("src/test/test_lotus.png");
     }
 }
