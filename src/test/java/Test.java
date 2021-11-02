@@ -43,7 +43,7 @@ public class Test {
             wordFrequencies.add(new WordFrequency("安全", (int) (Math.random() * 1000)));
         }
 
-        Dimension dimension = new Dimension(1598, 1064);
+        Dimension dimension = new Dimension(799, 532);
         WordCloud wordCloud = new WordCloud(dimension, CollisionMode.PIXEL_PERFECT);
         wordCloud.setPadding(2);
         wordCloud.setColorPalette(new ColorPalette(Color.RED, Color.MAGENTA, Color.PINK, Color.GREEN, Color.ORANGE, Color.BLUE, Color.CYAN));

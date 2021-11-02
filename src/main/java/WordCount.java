@@ -114,10 +114,10 @@ public class WordCount {
             }
         }
 
-        Dimension dimension = new Dimension(1598, 1064);
+        Dimension dimension = new Dimension(799, 532);
         WordCloud wordCloud = new WordCloud(dimension, CollisionMode.PIXEL_PERFECT);
         wordCloud.setPadding(2);
-        wordCloud.setColorPalette(new ColorPalette(Color.RED, Color.MAGENTA, Color.PINK, Color.GREEN, Color.ORANGE, Color.BLUE, Color.CYAN));
+        wordCloud.setColorPalette(new ColorPalette(Color.RED, Color.MAGENTA, Color.GREEN, Color.ORANGE, Color.BLUE, Color.CYAN));
         wordCloud.setFontScalar(new LinearFontScalar(10, 40));
         Font font = Font.createFont(Font.TRUETYPE_FONT, WordCount.class.getResourceAsStream("/HuaWenXingKai.ttf")).deriveFont(9f);
         GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
