@@ -9,8 +9,8 @@ Given a file --**Map**-> (Split by line) for each line(i.e., sentence), tokenize
 ```hadoop  jar  jar_path_of_the_project  WordCount  file_path(text)/to/process  result_path(dir)/to/store```
 
 ## Example
-### background of lotus
+### wordcloud of lotus
 ![lotus_wordcloud](https://github.com/ssjjcao/EasyWordCount/blob/master/src/main/resources/word_freq_500_lotus.png)
 
-### background of whale
+### wordcloud of whale
 ![whale_wordcloud](https://github.com/ssjjcao/EasyWordCount/blob/master/src/main/resources/word_freq_500.png)
