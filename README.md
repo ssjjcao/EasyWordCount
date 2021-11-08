@@ -6,7 +6,9 @@ Download and unzip [HanLP data](https://file.hankcs.com/hanlp/data-for-1.7.5.zip
 Given a file --**Map**-> (Split by line) for each line(i.e., sentence), tokenize the sentence using *CRFLexicalAnalyzer* in [HanLP](https://github.com/hankcs/HanLP), and then count the non-stopwords --**Reduce**-> Sum up the number of each non-stopword --> Generate word-cloud using [Kumo](https://github.com/kennycason/kumo).
 
 ## Usage
-```hadoop  jar  jar_path_of_the_project  WordCount  file_path(text)/to/process  result_path(dir)/to/store```
+```shell
+hadoop jar jar_path_of_the_project WordCount file_path(text)/to/process result_path(dir)/to/store
+```
 
 ## Example
 ### wordcloud of lotus
