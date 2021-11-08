@@ -9,6 +9,7 @@ Given a file --**Map**-> (Split by line) for each line(i.e., sentence), tokenize
 ```shell
 hadoop jar jar_path_of_the_project WordCount file_path(text)/to/process result_path(dir)/to/store
 ```
+\* The input file should be in the format of "one sentence per line".
 
 ## Example
 ### wordcloud of lotus
